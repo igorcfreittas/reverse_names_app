@@ -6,9 +6,7 @@ void main() {
   runApp(new MaterialApp(
     title: 'Reverse Names',
     theme: ThemeData(
-      primaryColor: Colors.deepOrange,
-      accentColor: Colors.deepOrange
-    ),
+        primaryColor: Colors.deepOrange, accentColor: Colors.deepOrange),
     home: Home(),
   ));
 }
@@ -19,12 +17,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   String _textOutput = "Text Output Here";
   final TextEditingController _textController = new TextEditingController();
 
   @override
-  Widget build(BuildContext context) {                          
+  Widget build(BuildContext context) {
     return new Scaffold(
       body: Container(
         decoration: new BoxDecoration(
@@ -43,11 +40,14 @@ class _HomeState extends State<Home> {
                   iconSize: 33.0,
                   color: Colors.red[900],
                   onPressed: () {
-                    if(_textOutput != "Text Output Here") {
+                    if (_textOutput != "Text Output Here") {
                       Clipboard.setData(new ClipboardData(text: _textOutput));
-                      _dialogShow("Copied!", "Your text was copied successfully", "Thank you", fontSizeTitle: 25.0, fontSizeContent: 20.0);
-                    }else {
-                      _dialogShow("Nothing to copy", "Write something!", "Ops", fontSizeTitle: 25.0, fontSizeContent: 20.0);
+                      _dialogShow("Copied!",
+                          "Your text was copied successfully", "Thank you",
+                          fontSizeTitle: 25.0, fontSizeContent: 20.0);
+                    } else {
+                      _dialogShow("Nothing to copy", "Write something!", "Ops",
+                          fontSizeTitle: 25.0, fontSizeContent: 20.0);
                     }
                   },
                 ),
@@ -55,10 +55,15 @@ class _HomeState extends State<Home> {
             ),
             new Padding(
               padding: EdgeInsets.symmetric(vertical: 80.0),
-              child:  new Text('Enter your words', 
-                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, color: Colors.white,), 
-                textAlign: TextAlign.center,
+              child: new Text(
+                'Enter your words',
+                style: new TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0,
+                  color: Colors.white,
                 ),
+                textAlign: TextAlign.center,
+              ),
             ),
             new Row(
               children: <Widget>[
@@ -75,7 +80,10 @@ class _HomeState extends State<Home> {
                           printText(text);
                         },
                         textAlign: TextAlign.center,
-                        style: new TextStyle(fontWeight: FontWeight.normal, fontSize: 25.5, color: Colors.white),
+                        style: new TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 25.5,
+                            color: Colors.white),
                         decoration: new InputDecoration(
                           border: InputBorder.none,
                           fillColor: Colors.deepOrange[600],
@@ -86,9 +94,14 @@ class _HomeState extends State<Home> {
                       new FlatButton(
                         onPressed: () {
                           _textController.clear();
-                          setState(() { _textOutput = "Text Output Here"; });
+                          setState(() {
+                            _textOutput = "Text Output Here";
+                          });
                         },
-                        child: new Icon(Icons.clear, color: Colors.red[900],),
+                        child: new Icon(
+                          Icons.clear,
+                          color: Colors.red[900],
+                        ),
                       ),
                     ],
                   ),
@@ -97,12 +110,16 @@ class _HomeState extends State<Home> {
             ),
             new Padding(
               padding: EdgeInsets.symmetric(vertical: 62.0),
-              child:  new Text(
-                _textOutput, 
+              child: new Text(
+                _textOutput,
                 softWrap: true,
-                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, color: Colors.white,), 
-                textAlign: TextAlign.center,
+                style: new TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0,
+                  color: Colors.white,
                 ),
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
         ),
@@ -112,39 +129,43 @@ class _HomeState extends State<Home> {
 
   void printText(String text) {
     setState(() {
-      if(text.length == 0) {
+      if (text.length == 0) {
         _textOutput = "Text output here";
-      }else if(text.length == 1) {
+      } else if (text.length == 1) {
         _textOutput = "Your text is too small";
-      }else {
+      } else {
         _textOutput = text.split('').reversed.join('');
       }
     });
   }
 
-  Future<Null> _dialogShow(
-      String title, 
-      String contentText, 
-      String buttonText, 
-      {double fontSizeTitle, 
-      double fontSizeContent
-    }) async {
+  Future<Null> _dialogShow(String title, String contentText, String buttonText,
+      {double fontSizeTitle, double fontSizeContent}) async {
     return showDialog<Null>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return new AlertDialog(
-          title: new Text(title, style: new TextStyle(fontSize: fontSizeTitle ?? 27.0),),
+          title: new Text(
+            title,
+            style: new TextStyle(fontSize: fontSizeTitle ?? 27.0),
+          ),
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
-                new Text(contentText, style: new TextStyle(fontSize: fontSizeContent ?? 40.0),),
+                new Text(
+                  contentText,
+                  style: new TextStyle(fontSize: fontSizeContent ?? 40.0),
+                ),
               ],
             ),
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text(buttonText, style: new TextStyle(color: Colors.deepOrange[400]),),
+              child: new Text(
+                buttonText,
+                style: new TextStyle(color: Colors.deepOrange[400]),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
